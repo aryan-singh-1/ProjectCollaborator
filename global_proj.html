@@ -1,0 +1,53 @@
+<html>
+<head>
+<style>
+body{
+    background-image: url("webimg4.webp");
+    background-repeat: no-repeat;
+    background-size: cover 
+    }
+h1 {
+    border: 2px solid aliceblue;
+    text-align: center;
+    color: aliceblue;
+}
+table {
+    border: 1px solid black;
+    width: 100%;
+    border-collapse:separate;
+    background-color: aliceblue;
+}
+th , td{
+    border: 1px solid black;
+}
+tr{
+    text-align: center;
+}</style>
+</head>
+<body>
+    <h1>Project Collaborator</h1>
+    <?php
+    include('connection.php');
+    $querystring = $_GET['search'];
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+    $result = mysqli_query($con, "SELECT * FROM project_info WHERE project_nm LIKE '%$querystring%'");
+    $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    ?>
+
+<table>
+    <tr>
+        <th>Project Name</th>
+        <th>Abstract</th>
+        <th>Show More</th>
+    </tr>
+
+<?php foreach ($rows as $row) { ?>
+       <tr>
+        <td><?php echo $row['project_nm'] ?></td>
+        <td><?php echo $row['Abstract'] ?></td>
+        <td><form method="get"action="more.html"> <input type="hidden" name="project_nm" value=<?php echo $row['project_nm'] ?>><input type="submit" value="More"></form></td>
+        </tr>
+   <?php } ?>
+</table>
+</body>
+</html>

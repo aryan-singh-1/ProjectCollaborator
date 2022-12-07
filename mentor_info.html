@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+     background: #232931;
+    }
+h1 {
+    border: 2px solid aliceblue;
+    text-align: center;
+    color: aliceblue;
+}
+table {
+    border: 1px solid black;
+    width: 100%;
+    border-collapse:separate;
+    background-color: aliceblue;
+}
+th , td{
+    border: 1px solid black;
+}
+tr{
+    text-align: center;
+}
+    </style>
+<!--where username='maryan2022' -->
+</head>
+<body>
+<?php
+include('connection.php');
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+$result = mysqli_query($con, "select * from mentor_info");
+
+$rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+?>
+
+<h1>Project Collaborator</h1>
+<table>
+    <tr>
+        <th>Mentor</th>
+        <th>Age</th>
+        <th>Fields</th>
+        <th>Get to Know</th>
+    </tr>
+    <?php foreach ($rows as $row) {
+        //printf("%s (%s)\n", $row["username"], $row["REPLY"]); ?>
+        <tr>
+         <td><?php echo $row['username']; ?></td>
+         <td><?php echo $row['Age']; ?></td>
+         <td><?php echo $row['Field']; ?></td>
+         <td><form method="get"action="more_mentor.html"> <input type="hidden" name="username" value=<?php echo $row['username']; ?>><input type="submit" value="More"></form></td>
+        </tr>
+    <?php } ?>
+
+</table>
+</body>
+</html>

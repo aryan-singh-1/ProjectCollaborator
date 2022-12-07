@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Project</title>
+    <style>
+        body{
+             background: #232931;
+        }
+        h1 {
+            border: 2px solid aliceblue;
+            text-align: center;
+            color:aliceblue;
+            border-color: aliceblue;
+        }
+        h2{
+            color:aliceblue;
+        }
+        form{
+            background-color: aliceblue;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Project Collaborator</h1>
+    <h2>Describe your Project</h2>
+
+    <div>
+        <form action="addprojinfo.php" method="post">
+            <p> USERNAME:<input type="text" id="username" name="username" /> </p>
+            <p> PROJECT NAME:<input type="text" id="project_nm" name="project_nm" /> </p>
+            <p> ABSTRACT:<hr><input type="text" id="Abstract" name="Abstract" style="height:40px; width: 40%;" /> </p>
+            <p> PROBLEM STATEMENT:<hr><input type="text" id="Problem Statement" name="Problem Statement" style="height:40px; width: 40%;" /> </p>
+            <p> OBJECTIVE:<hr><input type="text" id="Objectives" name="Objectives" style="height:40px; width: 40%;" /> </p>
+            <p> COMPREHENSIVE:<hr><input type="text" id="Comprehensive" name="Comprehensive" style="height:40px; width: 40%;"/> </p> <hr>
+            <p> LINKS:<input type="text" id="Links" name="Links" /> </p>
+            <p> MEMBER 1 USERNAME:<input type="text" id="memb1_username" name="memb1_username" /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;MEMBER 2 USERNAME:<input type="text" id="memb2_username" name="memb2_username" />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;MENTOR USERNAME:<input type="text" id="mentor_username" name="mentor_username" /> </p>
+
+            <p> <input type="submit" id="btn" value="Submit" /> </p>
+        </form>
+    </div>
+</body>
+
+</html>

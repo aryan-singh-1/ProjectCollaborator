@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1 {
+    border: 2px solid black;
+    background-color: lawngreen;
+    text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h1>Project Collaborator</h1>
+<div class="column-2">
+<h2>Your Project Details</h2>
+    <p><?php include('connection.php');
+        $username = $_GET['username'];
+        $project_nm = $_GET['project_nm'];
+        $query = mysqli_query($con,"select * from project_info where username ='$username' and project_nm = '$project_nm' ");
+        $row = mysqli_fetch_array($query);
+        echo "Project Name:",$row['project_nm'] ;
+        echo "<br>";
+        echo "Abstract:",$row['Abstract'] ;
+        echo "<br>";
+        echo "username:",$row['username'];
+        ?></p>
+</div>
+    <p>
+    <form action="SendReq.php" method="post" target="_blank">
+        <p> MENTOR USERNAME:<input type="text" id="mentor_username" name="mentor_username" /> </p>
+        <p> Write Request:<input type="text" id="REQ" name="REQ" /> </p>
+        <p><input type="hidden" name="fromUser" value=<?php echo $username; ?>></p>
+        <p><input type="hidden" name="proj" value=<?php echo $project_nm; ?>></p>
+        <p> <input type="submit" id="btn" value="Request User" /> </p>
+    </form>
+    </p>
+</body>
+</html>

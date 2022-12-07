@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+body{
+            background-image: url("webimg4.webp");
+            background-repeat: no-repeat;
+            background-size: cover 
+        }
+.column-3 {
+            border:2px solid black;
+            float: right;
+            height: 100000px;
+            width: 65%;
+            padding: 40px;
+            padding-left: 70px;
+            padding-right: 70px;
+            height: 400px;
+            margin: 30px;
+            margin-right: 30px;
+            margin-bottom: 70px;
+            line-height: 2;
+            color:aliceblue;
+            border-color: transparent;
+        }
+        h1 {
+            text-align: center;
+            color:aliceblue;
+            border-color: aliceblue;
+        }
+</style>
+</head>
+<body>
+<?php      
+    include('connection.php');  
+    $username = $_POST['user'];  
+    $password = $_POST['pass'];
+    $prefer = $_POST['prefer'];
+      
+        //to prevent from mysqli injection  
+        $username = stripcslashes($username);  
+        $password = stripcslashes($password);  
+        $username = mysqli_real_escape_string($con, $username);  
+        $password = mysqli_real_escape_string($con, $password);  
+      
+
+        if($prefer == userstu){
+        $sql = "select * from login where username = '$username' and password = '$password'";}
+        else{
+        $sql = "select * from mentor_login where username = '$username' and password = '$password'";}   
+        $result = mysqli_query($con, $sql);  
+        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);  
+        $count = mysqli_num_rows($result);  
+          
+        if($count == 1){  
+            echo "<h1><center> Login successful </center></h1>";
+            if($sql == "select * from login where username = '$username' and password = '$password'"){
+                echo '<form method="get" action="HOME_page_stu.html" target="_blank">
+                    <input type="hidden" name="username" value="'.$username.'"> 
+                    <input type="submit" value="Go to Dashboard" />
+                    </form>';}
+            else{
+                echo '<form method="get" action="HOME_page_ment.html" target="_blank">
+                    <input type="hidden" name="username" value="'.$username.'"> 
+                    <input type="submit" value="Go to Dashboard" />
+                    </form>';
+            }
+            echo $prefer; 
+        } 
+        else{  
+            echo "<h1> Login failed. Invalid username or password.</h1>";  
+        }          
+?> 
+
+<div class="column-3">
+    <h2>Papers and Projects</h2>
+    <iframe frameborder="1" width="400" height="300" src="//www.engpaper.com/free-research-papers-computer-science.htm"></iframe>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    <iframe frameborder="1" width="400" height="300" src="//www.sciencedirect.com"></iframe>
+
+</div>
+</body>
+</html>

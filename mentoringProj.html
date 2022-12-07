@@ -1,0 +1,51 @@
+<html>
+<head>
+<style>
+body{
+     background: #232931;
+    }
+h1 {
+    border: 2px solid aliceblue;
+    text-align: center;
+    color: aliceblue;
+}
+table {
+    border: 1px solid black;
+    width: 100%;
+    border-collapse:separate;
+    background-color: aliceblue;
+}
+th , td{
+    border: 1px solid black;
+}
+tr{
+    text-align: center;
+}</style></head>
+<body>
+    <h1>Project Collaborator</h1>
+    <?php
+    include('connection.php');
+    $username = $_GET['username'];
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+    $result = mysqli_query($con, "select * from project_info where mentor_username = '$username'");
+    $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    echo $username;
+    ?>
+
+<table>
+    <tr>
+        <th>Project Name</th>
+        <th>Abstract</th>
+        <th>Show More</th>
+    </tr>
+
+    <?php foreach ($rows as $row) { ?>
+       <tr>
+        <td><?php echo $row['project_nm'] ?></td>
+        <td><?php echo $row['Abstract'] ?></td>
+        <td><form><input type="submit" value="More"></form></td>
+        </tr>
+   <?php } ?>
+</table>
+</body>
+</html>

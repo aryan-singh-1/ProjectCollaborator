@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background: #232931;
+            background-repeat: no-repeat;
+            background-size: cover
+        }
+
+        h1 {
+            border: 2px solid aliceblue;
+            text-align: center;
+            color: aliceblue;
+            border-color: aliceblue;
+        }
+
+        table {
+            background: aliceblue;
+            border: 1px solid aliceblue;
+            width: 100%;
+            border-collapse: separate;
+        }
+
+        th,
+        td {
+            border: 1px solid aliceblue;
+        }
+
+        tr {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Project Collaborator</h1>
+
+    <?php
+    include('connection.php');
+    $username = $_GET['username'];
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+    $result = mysqli_query($con, "select * from social_info where username = '$username'");
+    $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    echo $username;
+    ?>
+
+    <table>
+        <tr>
+            <th>From User</th>
+            <th>Project Name</th>
+            <th>Status</th>
+            <th>Know More</th>
+            <th>Respond</th>
+        </tr>
+        <?php foreach ($rows as $row) { ?>
+        <tr>
+            <td>
+                <?php echo $row['Accepted']; ?>
+            </td>
+            <td>
+                <?php echo $row['REPLY']; ?>
+            </td>
+            <td>
+                <?php echo $row['REQ']; ?>
+            </td>
+            <td>
+                <form method="get" action="more.html"> <input type="hidden" name="project_nm" value=<?php echo
+                        $row['REPLY']; ?>><input type="submit" value="More"></form>
+            </td>
+            </td>
+            <td>
+                <form action="status.html" method="get"><input type="hidden" name="proj" value=<?php echo
+                        $row['REPLY']; ?>><input type="hidden" name="stat" value="Accept">
+                        <input type="submit" value="Accept"></form> OR
+                <form action="status.html" method="get"><input type="hidden" name="proj" value=<?php echo
+                        $row['REPLY']; ?>><input type="hidden" name="stat" value="Deny">
+                        <input type="submit" value="Deny"></form>
+            </td>
+        </tr>
+        <?php } ?>
+    </table>
+</body>
+
+</html>

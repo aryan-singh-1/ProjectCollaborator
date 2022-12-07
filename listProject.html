@@ -1,0 +1,61 @@
+<html>
+<head>
+<style>
+body{
+     background: #232931;
+    }
+h1 {
+    border: 2px solid aliceblue;
+    text-align: center;
+    color: aliceblue;
+}
+table {
+    border: 1px solid black;
+    width: 100%;
+    border-collapse:separate;
+    background-color: aliceblue;
+}
+th , td{
+    border: 1px solid black;
+}
+tr{
+    text-align: center;
+}</style>
+</head>
+<body>
+    <h1>Project Collaborator</h1>
+    <?php
+    include('connection.php');
+    $username = $_GET['username'];
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+    $result = mysqli_query($con, "select * from project_info where username = '$username'");
+    $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    echo $username;
+    ?>
+
+<table>
+    <tr>
+        <th>Project Name</th>
+        <th>Abstract</th>
+        <th>Edit Project</th>
+        <th>Request Mentor</th>
+        <th>Show More</th>
+        <th>Public</th>
+    </tr>
+
+<?php foreach ($rows as $row) { ?>
+       <tr>
+        <td><?php echo $row['project_nm'] ?></td>
+        <td><?php echo $row['Abstract'] ?></td>
+        <td><form><input type="submit" value="Edit"></form></td>
+        <td><form method="get" action="REQmentor.html" target="_blank">
+            <input type="hidden" name="username" value=<?php echo $username ?>>
+            <input type="hidden" name="project_nm" value=<?php echo $row['project_nm'] ?>>
+            <input type="submit" value="Request"></form></td>
+        <td><form method="get"action="more.html"> <input type="hidden" name="project_nm" value=<?php echo $row['project_nm'] ?>><input type="submit" value="More"></form></td>
+        <td><form action="check.php"><input method="POST" type="checkbox" name="check"><input type="submit" value="save"></form></td>
+        </tr>
+   <?php ;} ?>
+</table>
+</body>
+</html>
